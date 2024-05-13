@@ -1,6 +1,6 @@
 from collections import deque
 
-from puzzle import Puzzle
+from .puzzle import Puzzle
 
 
 class Tree:

@@ -94,6 +94,7 @@ class Puzzle:
     def distance_to_solution(
         self, heuristic_to_use=NUM_OF_WRONG_PIECES_HEURISTIC
     ):
+        # TODO: Add heuristics
         return np.sum(
             self.board != np.array([[1, 2, 3], [4, 5, 6], [7, 8, -1]])
         )

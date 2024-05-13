@@ -1,1 +1,1 @@
-import puzzle
+from . import puzzle
