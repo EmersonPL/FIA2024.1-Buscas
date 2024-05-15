@@ -10,6 +10,7 @@ class Tree:
         self.children = puzzle.get_allowed_moves()
         self.parent = parent
 
+        self.depth = 0 if parent is None else parent.depth + 1
         self.visited = False
 
     def create_child(self, i):

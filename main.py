@@ -1,9 +1,10 @@
 from searches.breadth_search import breadth_search
-from searches.depth_search import depth_search
+from searches.depth_search import depth_search, limited_depth_search
 from searches.heuristics import (
     MANHATTAN_DISTANCE_HEURISTIC,
     NUM_OF_WRONG_PIECES_HEURISTIC,
 )
+from searches.status import SearchStatus
 from sliding_puzzle.puzzle import Puzzle
 
 
@@ -12,15 +13,18 @@ def main():
     puzzle = Puzzle(min_moves=5, max_moves=10)
 
     breadth_path = breadth_search(puzzle)
-    print_path(breadth_path, True)
+    print_path(breadth_path, True, only_size=True)
 
     puzzle.restart()
 
     original_depth_path = depth_search(puzzle)
-    print_path(original_depth_path, True)
+    print_path(original_depth_path, True, only_size=True)
 
-    # puzzle.restart()
-    # limited_depth_path = depth_search(puzzle, "limited_depth")
+    puzzle.restart()
+
+    limited_depth_path = limited_depth_search(puzzle, 10)
+    print_path(limited_depth_path, True)
+
     #
     # puzzle.restart()
     # iterative_depth_path = depth_search(puzzle, "iterative_deepening")
@@ -35,9 +39,17 @@ def main():
     # )
 
 
-def print_path(path, only_moves=True):
-    print(f"Solution size: {len(path)}")
-    for node in path:
+def print_path(result, only_moves=True, only_size=False):
+    if not result or result == SearchStatus.FAILURE:
+        print(f"No solution found!")
+        return
+
+    print(f"Solution size: {len(result)}")
+
+    if only_size:
+        return
+
+    for node in result:
         print(f"Movement: {node.movement}")
         if not only_moves:
             print(f"Current Board: ")
