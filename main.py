@@ -1,4 +1,5 @@
 from searches.breadth_search import breadth_search
+from searches.depth_search import depth_search
 from searches.heuristics import (
     MANHATTAN_DISTANCE_HEURISTIC,
     NUM_OF_WRONG_PIECES_HEURISTIC,
@@ -7,15 +8,17 @@ from sliding_puzzle.puzzle import Puzzle
 
 
 def main():
-    puzzle = Puzzle(min_moves=50, max_moves=100)
+    # puzzle = Puzzle(min_moves=50, max_moves=100)
+    puzzle = Puzzle(min_moves=5, max_moves=10)
 
     breadth_path = breadth_search(puzzle)
+    print_path(breadth_path, True)
 
-    print_path(breadth_path, False)
+    puzzle.restart()
 
-    # puzzle.restart()
-    # original_depth_path = depth_search(puzzle, "original")
-    #
+    original_depth_path = depth_search(puzzle)
+    print_path(original_depth_path, True)
+
     # puzzle.restart()
     # limited_depth_path = depth_search(puzzle, "limited_depth")
     #
@@ -40,6 +43,8 @@ def print_path(path, only_moves=True):
             print(f"Current Board: ")
             node.puzzle.print_board()
             print("*"*80)
+
+    print("*" * 80)
 
 
 if __name__ == '__main__':
