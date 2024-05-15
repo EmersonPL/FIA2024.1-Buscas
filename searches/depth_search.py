@@ -25,7 +25,7 @@ def depth_search(puzzle):
         node = frontier.pop()
 
         if node.puzzle.is_solution():
-            return create_path(node)
+            return node
 
         _expand_children(node, frontier, reached)
 
@@ -42,10 +42,8 @@ def limited_depth_search(puzzle, depth_limit):
     if result == SearchStatus.FAILURE or result == SearchStatus.CUTOFF:
         return SearchStatus.FAILURE
 
-    return create_path(result)
 
-
-def _limited_depth_search(puzzle, depth_limit: int) -> Tree | SearchStatus:
+def limited_depth_search(puzzle, depth_limit: int) -> Tree | SearchStatus:
     """Return the path to the solution, using a depth-limited search.
 
     The search is a modified version of the depth-limited search algorithm,

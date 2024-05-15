@@ -8,7 +8,7 @@ def breadth_search(puzzle):
     tree = Tree((-1, -1), puzzle)
 
     if puzzle.is_solution():
-        return create_path(tree)
+        return tree
 
     frontier = deque([tree])
     reached = {tree.puzzle.encode()}
@@ -20,7 +20,7 @@ def breadth_search(puzzle):
             child = node.create_child(i)
 
             if child.puzzle.is_solution():
-                return create_path(child)
+                return child
 
             child_board = child.puzzle.encode()
             if child_board not in reached:
