@@ -38,9 +38,11 @@ def main():
 
     puzzle.restart()
 
-    #
-    # puzzle.restart()
-    # iterative_depth_path = depth_search(puzzle, "iterative_deepening")
+    print("Iterative Deepening search")
+    iterative_depth_path = iterative_deepening_search(puzzle)
+    print_path(iterative_depth_path, only_moves=True)
+    print()
+
     #
     # puzzle.restart()
     # a_star_path_manhattan = a_star_search(puzzle, MANHATTAN_DISTANCE_HEURISTIC)

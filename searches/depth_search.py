@@ -32,15 +32,16 @@ def depth_search(puzzle):
     return None
 
 
-def limited_depth_search(puzzle, depth_limit):
-    """Run a depth-limited search, returning the path to the solution.
+def iterative_deepening_search(puzzle):
+    """Return the path to the solution, using an iterative deepening search."""
+    result = SearchStatus.CUTOFF
 
-    If no solution is found in the given depth limit, return None.
-    """
-    result = _limited_depth_search(puzzle, depth_limit)
+    i = 0
+    while result == SearchStatus.CUTOFF:
+        result = limited_depth_search(puzzle, i)
+        i += 1
 
-    if result == SearchStatus.FAILURE or result == SearchStatus.CUTOFF:
-        return SearchStatus.FAILURE
+    return result
 
 
 def limited_depth_search(puzzle, depth_limit: int) -> Tree | SearchStatus:
