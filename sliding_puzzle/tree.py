@@ -17,7 +17,7 @@ class Tree:
         p = Puzzle(board=self.puzzle.board.copy())
         p.move(self.children[i])
 
-        self.children[i] = Tree(self.children[i], p, self)
+        return Tree(self.children[i], p, self)
 
 
 def create_path(node):

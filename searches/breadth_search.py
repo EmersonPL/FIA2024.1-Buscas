@@ -17,9 +17,8 @@ def breadth_search(puzzle):
         node = frontier.popleft()
 
         for i, movement in enumerate(node.children):
-            node.create_child(i)
+            child = node.create_child(i)
 
-            child = node.children[i]
             if child.puzzle.is_solution():
                 return create_path(child)
 

@@ -22,11 +22,7 @@ def depth_search(puzzle):
             return create_path(node)
 
         for i, child in enumerate(node.children):
-            node.create_child(i)
-            child = node.children[i]
-
-            # if child.puzzle.is_solution():
-            #     return create_path(child)
+            child = node.create_child(i)
 
             child_board = child.puzzle.encode()
             if child_board in reached:
