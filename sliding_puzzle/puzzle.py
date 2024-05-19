@@ -2,8 +2,6 @@ from copy import deepcopy
 
 import numpy as np
 
-from searches.heuristics import NUM_OF_WRONG_PIECES_HEURISTIC
-
 
 class Puzzle:
     board: np.ndarray
@@ -90,11 +88,3 @@ class Puzzle:
             move = rng.integers(0, len(allowed_moves))
 
             self.move(allowed_moves[move])
-
-    def distance_to_solution(
-        self, heuristic_to_use=NUM_OF_WRONG_PIECES_HEURISTIC
-    ):
-        # TODO: Add heuristics
-        return np.sum(
-            self.board != np.array([[1, 2, 3], [4, 5, 6], [7, 8, -1]])
-        )

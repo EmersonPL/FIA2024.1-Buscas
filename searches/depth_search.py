@@ -1,7 +1,7 @@
 from collections import deque
 
 from searches.status import SearchStatus
-from sliding_puzzle.tree import Tree, create_path
+from sliding_puzzle.tree import Tree
 
 
 # TODO: To be closer to the original algorithm, all depth-first searches
@@ -64,7 +64,7 @@ def limited_depth_search(puzzle, depth_limit: int) -> Tree | SearchStatus:
         if node.puzzle.is_solution():
             return node
 
-        if node.depth > depth_limit:
+        if node.depth >= depth_limit:
             result = SearchStatus.CUTOFF
         else:
             _expand_children(node, frontier, reached)

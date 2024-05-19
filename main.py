@@ -1,3 +1,6 @@
+import numpy as np
+
+from searches.a_star import a_star_search
 from searches.breadth_search import breadth_search
 from searches.depth_search import (
     depth_search,
@@ -5,8 +8,8 @@ from searches.depth_search import (
     limited_depth_search,
 )
 from searches.heuristics import (
-    MANHATTAN_DISTANCE_HEURISTIC,
-    NUM_OF_WRONG_PIECES_HEURISTIC,
+    manhattan_distance_heuristic,
+    num_of_wrong_pieces_heuristic,
 )
 from searches.status import SearchStatus
 from sliding_puzzle.puzzle import Puzzle
@@ -40,27 +43,41 @@ def main():
 
     print("Iterative Deepening search")
     iterative_depth_path = iterative_deepening_search(puzzle)
-    print_path(iterative_depth_path, only_moves=True)
+    print_path(iterative_depth_path, only_size=True)
     print()
 
-    #
-    # puzzle.restart()
-    # a_star_path_manhattan = a_star_search(puzzle, MANHATTAN_DISTANCE_HEURISTIC)
-    #
-    # puzzle.restart()
-    # a_star_path_num_wrong_pieces = a_star_search(
-    #     puzzle,
-    #     NUM_OF_WRONG_PIECES_HEURISTIC
-    # )
+    puzzle.restart()
+
+    print("A* with `num of wrong pieces heuristic`")
+    a_star_path_num_wrong_pieces = a_star_search(
+        puzzle,
+        num_of_wrong_pieces_heuristic
+    )
+    print_path(a_star_path_num_wrong_pieces, only_size=True)
+    print()
+
+    print("A* with `manhattan distance heuristic`")
+    puzzle.restart()
+    a_star_path_manhattan = a_star_search(
+        puzzle,
+        manhattan_distance_heuristic
+    )
+    print_path(a_star_path_manhattan, only_size=True)
 
 
 def print_path(result, only_moves=True, only_size=False):
-    if not result or result == SearchStatus.FAILURE:
+    if (
+        not result
+        or result == SearchStatus.FAILURE
+        or result == SearchStatus.CUTOFF
+    ):
         print(f"No solution found!")
         return
 
     path = create_path(result)
-    print(f"Solution size: {len(path)}")
+    # The solution size is `path - 1` to keep only number of movements,
+    # instead of number of states (that include the starting board)
+    print(f"Solution size: {len(path) - 1}")
 
     if only_size:
         return

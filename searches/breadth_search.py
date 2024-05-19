@@ -1,6 +1,6 @@
 from collections import deque
 
-from sliding_puzzle.tree import Tree, create_path
+from sliding_puzzle.tree import Tree
 
 
 def breadth_search(puzzle):
