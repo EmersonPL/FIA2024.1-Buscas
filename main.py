@@ -17,8 +17,10 @@ from sliding_puzzle.tree import create_path
 
 
 def main():
-    # puzzle = Puzzle(min_moves=50, max_moves=100)
-    puzzle = Puzzle(min_moves=5, max_moves=10)
+    puzzle = Puzzle(min_moves=50, max_moves=100)
+    # puzzle = Puzzle(min_moves=5, max_moves=10)
+    print("Initial state: ")
+    puzzle.print_board()
 
     print("Breadth search")
     breadth_path = breadth_search(puzzle)
@@ -27,10 +29,10 @@ def main():
 
     puzzle.restart()
 
-    print("Depth search")
-    original_depth_path = depth_search(puzzle)
-    print_path(original_depth_path, only_size=True)
-    print()
+    # print("Depth search")
+    # original_depth_path = depth_search(puzzle)
+    # print_path(original_depth_path, only_size=True)
+    # print()
 
     puzzle.restart()
 
